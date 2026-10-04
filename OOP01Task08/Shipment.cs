@@ -8,7 +8,7 @@ namespace OOP01Task08
     {
         private string _trackingCode;
         private string _description;
-        private double _weight;
+        private decimal _weight;
         private decimal _deliveryFee;
         public DeliveryAddress Destination { get; set; }
 
@@ -29,7 +29,7 @@ namespace OOP01Task08
             }
         }
 
-        public double Weight
+        public decimal Weight
         {
             get { return _weight; }
             set
@@ -53,17 +53,17 @@ namespace OOP01Task08
             }
         }
 
-        public Shipment(string trackingCode, string description, double weight, decimal deliveryFee, DeliveryAddress destination)
+        public Shipment(string trackingCode, string description, decimal weight, decimal deliveryFee, DeliveryAddress destination)
         {
             _trackingCode = !string.IsNullOrWhiteSpace(trackingCode) ? trackingCode : "UNKNOWN";
             _description = !string.IsNullOrWhiteSpace(description) ? description : "Unknown";
-            _weight = weight > 0 ? weight : 1.0;
+            _weight = weight > 0 ? weight : 1.0m;
             _deliveryFee = deliveryFee > 0 ? deliveryFee : 50.0m;
 
             Destination = destination;
         }
 
-        public Shipment(string trackingCode) : this(trackingCode, "Unknown", 1.0, 50.0m, new DeliveryAddress("Cairo", "Main St.", 1)) { }
+        public Shipment(string trackingCode) : this(trackingCode, "Unknown", 1.0m, 50.0m, new DeliveryAddress("Cairo", "Main St.", 1)) { }
 
         public virtual decimal EstimatedCost
         {
@@ -81,14 +81,14 @@ namespace OOP01Task08
             }
         }
 
-        public void UpdateWeight(double newWeight)
+        public void UpdateWeight(decimal newWeight)
         {
             if (newWeight > 0)
             {
                 Weight = newWeight;
             }
         }
-        public void UpdateWeight(double baseWeight, double extraPackingWeight)
+        public void UpdateWeight(decimal baseWeight, decimal extraPackingWeight)
         {
             if (baseWeight > 0 && extraPackingWeight >= 0)
             {
@@ -105,6 +105,6 @@ namespace OOP01Task08
             Console.WriteLine($"Estimated Cost: {EstimatedCost} EGP");
             Console.WriteLine("--------------------------------------------------");
         }
-    
+
     }
 }
