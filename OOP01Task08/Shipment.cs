@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOP01Task08
 {
-    internal class Shipment
+    internal abstract class Shipment
     {
         private string _trackingCode;
         private string _description;
@@ -65,13 +65,7 @@ namespace OOP01Task08
 
         public Shipment(string trackingCode) : this(trackingCode, "Unknown", 1.0m, 50.0m, new DeliveryAddress("Cairo", "Main St.", 1)) { }
 
-        public virtual decimal EstimatedCost
-        {
-            get
-            {
-                return DeliveryFee + (decimal)(Weight * 5);
-            }
-        }
+        public abstract decimal EstimatedCost { get; }
 
         public void UpdateDeliveryFee(decimal newFee)
         {
@@ -95,16 +89,7 @@ namespace OOP01Task08
                 Weight = baseWeight + extraPackingWeight;
             }
         }
-
-        public virtual void PrintShipment()
-        {
-            Console.WriteLine($"Tracking Code : {TrackingCode}");
-            Console.WriteLine($"Description   : {Description}");
-            Console.WriteLine($"Weight        : {Weight} KG");
-            Console.WriteLine($"Delivery Fee  : {DeliveryFee} EGP");
-            Console.WriteLine($"Estimated Cost: {EstimatedCost} EGP");
-            Console.WriteLine("--------------------------------------------------");
-        }
-
+        public abstract void PrintShipment (); 
+    
     }
 }

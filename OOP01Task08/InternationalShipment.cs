@@ -30,17 +30,14 @@ namespace OOP01Task08
                     _customsFee = value;
             }
         }
-        public override decimal EstimatedCost
+        public override decimal EstimatedCost 
         {
-            get
-            {
-                return DeliveryFee + (decimal)(Weight * 5) + CustomsFee;
-            }
+            get{ return DeliveryFee + (Weight * 5) + CustomsFee; }
         }
 
 
 
-        public InternationalShipment(string destinationCountry, decimal customsFee, string trackingCode, string description, double weight, decimal deliveryFee, DeliveryAddress destination) : base(trackingCode, description, weight, deliveryFee, destination)
+        public InternationalShipment(string destinationCountry, decimal customsFee, string trackingCode, string description, decimal weight, decimal deliveryFee, DeliveryAddress destination) : base(trackingCode, description, weight, deliveryFee, destination)
         {
             DestinationCountry = destinationCountry;
             CustomsFee = customsFee;

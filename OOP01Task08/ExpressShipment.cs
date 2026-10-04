@@ -8,7 +8,7 @@ namespace OOP01Task08
     internal class ExpressShipment : Shipment
     {
         private decimal _extraFee;
-        public ExpressShipment(decimal extraFee, string trackingCode, string description, double weight, decimal deliveryFee, DeliveryAddress destination) : base(trackingCode, description, weight, deliveryFee, destination)
+        public ExpressShipment(decimal extraFee, string trackingCode, string description, decimal weight, decimal deliveryFee, DeliveryAddress destination) : base(trackingCode, description, weight, deliveryFee, destination)
         {
             ExtraFee = extraFee;
         }
@@ -28,17 +28,14 @@ namespace OOP01Task08
             }
         }
 
-        public override decimal EstimatedCost
+        public override decimal EstimatedCost 
         {
-            get
-            {
-                return DeliveryFee + (decimal)(Weight * 5) + ExtraFee;
-            }
+
+            get { return DeliveryFee + (Weight * 5) + ExtraFee;  }
         }
         public override void PrintShipment()
         {
             Console.WriteLine("Express Shipment\n");
-            //base.PrintShipment(); 
             Console.WriteLine($"Tracking Code : {TrackingCode}");
             Console.WriteLine($"Description   : {Description}");
             Console.WriteLine($"Weight        : {Weight} KG");
