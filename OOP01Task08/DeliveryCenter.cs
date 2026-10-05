@@ -1,4 +1,5 @@
 ﻿using OOP01Task08;
+using OOP01Task08.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -88,10 +89,6 @@ namespace OOP01Task08
             Console.WriteLine("==================================================");
             Console.WriteLine($"Delivery Center ");
             Console.WriteLine("==================================================");
-            Console.WriteLine($"Driver : {AssignedDriver.Name}");
-            Console.WriteLine("==================================================");
-
-
             if (_shipments != null)
             {
                 for (int i = 0; i < _shipments.Length; i++)
@@ -99,6 +96,19 @@ namespace OOP01Task08
                     if (_shipments[i] != null)
                     {
                         _shipments[i].PrintShipment();
+                    }
+                }
+            }
+        }
+        public void PrintTrackingStatuses()
+        {
+            if (_shipments != null)
+            {
+                foreach (ITrackable t in _shipments)
+                {
+                    if (t != null)
+                    {
+                        Console.WriteLine(t.GetTrackingStatus());
                     }
                 }
             }

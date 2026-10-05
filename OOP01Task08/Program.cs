@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+using OOP01Task08.Interface;
 using System.Diagnostics.Contracts;
 
 namespace OOP01Task08
@@ -21,76 +22,65 @@ namespace OOP01Task08
             #endregion
 
             #region In Main
-            // // a. Create a Driver
-            // Driver driver = new Driver("Ahmed Mohamed");
+            DeliveryCenter center = new DeliveryCenter("Cairo Main Center");
 
-            //// b. Create a DeliveryCenter
-            //DeliveryCenter center = new DeliveryCenter("Cairo Main Center");
+            //a. Create one StandardShipment
+            DeliveryAddress stdAddress = new DeliveryAddress("Cairo", "Tahrir St", 10);
+            StandardShipment standardShipment = new StandardShipment("SH001", "Laptop", 3.0m, 80, stdAddress);
 
-            //// c. Assign the Driver to the DeliveryCenter
-            //center.AssignedDriver = driver;
+            // b. Create one ExpressShipment
+            DeliveryAddress expAddress = new DeliveryAddress("Giza", "Pyramids St", 5);
+            ExpressShipment expressShipment = new ExpressShipment(20, "EX002", "Smart Phone", 1.5m, 120, expAddress);
 
-            //// d. Create one StandardShipment
-            //DeliveryAddress stdAddress = new DeliveryAddress("Cairo", "Tahrir St", 10);
-            //StandardShipment standardShipment = new StandardShipment("SH001", "Laptop", 3.0, 80, stdAddress);
+            // c. Create one InternationalShipment
+            DeliveryAddress intAddress = new DeliveryAddress("Riyadh", "King Fahd Rd", 12);
+            InternationalShipment internationalShipment = new InternationalShipment("Saudi Arabia", 50, "IN003", "Document File", 0.5m, 200, intAddress);
 
-            //// e. Create one ExpressShipment
-            //DeliveryAddress expAddress = new DeliveryAddress("Giza", "Pyramids St", 5);
-            //ExpressShipment expressShipment = new ExpressShipment(20, "EX002", "Smart Phone", 1.5, 120, expAddress);
+            //// d. Add all shipments to the DeliveryCenter
+            center.AddShipment(standardShipment);
+            center.AddShipment(expressShipment);
+            center.AddShipment(internationalShipment);
 
-            //// f. Create one InternationalShipment
-            //DeliveryAddress intAddress = new DeliveryAddress("Riyadh", "King Fahd Rd", 12);
-            //InternationalShipment internationalShipment = new InternationalShipment("Saudi Arabia", 50, "IN003", "Document File", 0.5, 200, intAddress);
+            //// e. Print all shipments using PrintAllShipments()
+            center.PrintAllShipments();
 
-            //// g. Add all shipments to the DeliveryCenter
-            //center.AddShipment(standardShipment);
-            //center.AddShipment(expressShipment);
-            //center.AddShipment(internationalShipment);
+            // f & h. Print tracking status using ITrackable[] array (covers both requirements cleanly)
+            ITrackable[] trackableShipments = new ITrackable[] { standardShipment, expressShipment, internationalShipment };
 
-            ////// h. Print all shipments using PrintAllShipments()
-            //center.PrintAllShipments();
+            Console.WriteLine("Tracking Status");
+            foreach (var item in trackableShipments)
+            {
+                if (item != null)
+                {
+                    Console.WriteLine(item.GetTrackingStatus());
+                }
+            }
+            Console.WriteLine("--------------------------------------------------");
 
-            //// i. Call DeliveryHelper.PrintShipmentDetails() for each shipment
-            //Console.WriteLine("\n--- Printing Using DeliveryHelper... ---");
-            //DeliveryHelper.PrintShipmentDetails(standardShipment);
-            //DeliveryHelper.PrintShipmentDetails(expressShipment);
-            //DeliveryHelper.PrintShipmentDetails(internationalShipment);
+            // g & i. Print insurance cost using IInsurable[] array (covers both requirements cleanly)
+            IInsurable[] insurableShipments = new IInsurable[] { standardShipment, expressShipment, internationalShipment };
 
-            //// j. Demonstrate both versions of UpdateWeight()
-            //Console.WriteLine("Updating Weight...\n");
-            //Console.WriteLine($"Original Weight : {standardShipment.Weight} KG"); //3
+            Console.WriteLine("\nInsurance");
+            foreach (var item in insurableShipments)
+            {
+                if (item != null)
+                {
+                    string shipmentTypeName = item switch
+                    {
+                        StandardShipment => "Standard Shipment",
+                        ExpressShipment => "Express Shipment",
+                        InternationalShipment => "International Shipment",
+                        _ => "Shipment"
+                    };
 
-            //standardShipment.UpdateWeight(5.0);
-            //Console.WriteLine($"Updated Weight : {standardShipment.Weight} KG");
+                    Console.WriteLine($"{shipmentTypeName} Insurance : {item.CalculateInsurance():F2} EGP");
+                }
+            }
+            Console.WriteLine("--------------------------------------------------");
 
-            //standardShipment.UpdateWeight(5.0, 0.5);
-            //Console.WriteLine($"Updated Weight After Packing : {standardShipment.Weight} KG");
+            Console.WriteLine("\nInterface Polymorphism Demonstrated Successfully.");
 
-            //Console.WriteLine("==============================================");
-
-            //// k. Build a Shipment[] holding mixed types and print all of them in a loop
-            //Console.WriteLine("Printing Using Shipment[]...\n");
-
-            //Shipment[] mixedShipments = new Shipment[]
-            //{ standardShipment,  expressShipment,internationalShipment };
-            //foreach (Shipment shipment in mixedShipments)
-            //{
-            //    if (shipment is StandardShipment)
-            //    {
-            //        Console.WriteLine("Standard Shipment...\n");
-            //    }
-            //    else if (shipment is ExpressShipment)
-            //    {
-            //        Console.WriteLine("Express Shipment...\n");
-            //    }
-            //    else if (shipment is InternationalShipment)
-            //    {
-            //        Console.WriteLine("International Shipment...\n");
-            //    }
-            //}
-            //Console.WriteLine("==============================================");
             #endregion
-            Console.WriteLine("test");
             Console.ReadLine();
         }
     }

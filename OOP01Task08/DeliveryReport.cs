@@ -13,7 +13,11 @@ namespace OOP01Task08
         }
         public void PrintInsurance(IInsurable shipment)
         {
-            Console.WriteLine(shipment.CalculateInsurance());
+            if (shipment != null)
+            {
+                decimal insuranceCost = shipment.CalculateInsurance();
+                Console.WriteLine($"Insurance Cost: {insuranceCost:F2} EGP" );
+            }
         }
     }
 }
