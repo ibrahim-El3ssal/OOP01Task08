@@ -1,11 +1,12 @@
 ﻿using OOP01Task08;
+using OOP01Task08.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OOP01Task08
 {
-    internal class InternationalShipment : Shipment
+    internal class InternationalShipment : Shipment, ITrackable
     {
         private string _destinationCountry;
         public string DestinationCountry
@@ -56,6 +57,13 @@ namespace OOP01Task08
             Console.WriteLine($"Estimated Cost: {EstimatedCost} EGP");
             
             Console.WriteLine("--------------------------------------------------");
+        }
+
+
+        public string GetTrackingStatus()
+        {
+            return $"Shipment {TrackingCode} is Out for Delivery.";
+
         }
     }
 }

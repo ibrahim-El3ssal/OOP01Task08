@@ -1,11 +1,12 @@
 ﻿using OOP01Task08;
+using OOP01Task08.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OOP01Task08
 {
-    internal class ExpressShipment : Shipment
+    internal class ExpressShipment : Shipment , ITrackable
     {
         private decimal _extraFee;
         public ExpressShipment(decimal extraFee, string trackingCode, string description, decimal weight, decimal deliveryFee, DeliveryAddress destination) : base(trackingCode, description, weight, deliveryFee, destination)
@@ -44,6 +45,12 @@ namespace OOP01Task08
             Console.WriteLine($"Estimated Cost: {EstimatedCost} EGP");
             Console.WriteLine("--------------------------------------------------");
         }
+
+        public string GetTrackingStatus()
+        {
+            return $"Shipment {TrackingCode} has been Delivered.";
+        }
+
 
     }
 }

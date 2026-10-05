@@ -1,11 +1,12 @@
 ﻿using OOP01Task08;
+using OOP01Task08.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace OOP01Task08
 {
-    internal class StandardShipment : Shipment 
+    internal class StandardShipment : Shipment, ITrackable
     {
         public StandardShipment(string trackingCode, string description, decimal weight, decimal deliveryFee, DeliveryAddress destination) : base(trackingCode, description, weight, deliveryFee, destination) { }
         public override void PrintShipment()
@@ -23,6 +24,12 @@ namespace OOP01Task08
         {
             get{ return DeliveryFee + (Weight * 5); }
                 
+        }
+
+
+        public string GetTrackingStatus()
+        {
+            return $"Shipment {TrackingCode} is Ready." ;
         }
 
     }
