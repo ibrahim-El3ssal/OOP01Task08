@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OOP01Task08
 {
-    internal class StandardShipment : Shipment, ITrackable
+    internal class StandardShipment : Shipment, ITrackable , IInsurable
     {
         public StandardShipment(string trackingCode, string description, decimal weight, decimal deliveryFee, DeliveryAddress destination) : base(trackingCode, description, weight, deliveryFee, destination) { }
         public override void PrintShipment()
@@ -23,14 +23,14 @@ namespace OOP01Task08
         public override decimal EstimatedCost 
         {
             get{ return DeliveryFee + (Weight * 5); }
-                
         }
-
-
         public string GetTrackingStatus()
         {
             return $"Shipment {TrackingCode} is Ready." ;
         }
-
+        public decimal CalculateInsurance()
+        {
+            return EstimatedCost * 0.05m ; 
+        }
     }
 }

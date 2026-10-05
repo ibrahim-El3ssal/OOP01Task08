@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OOP01Task08
 {
-    internal class InternationalShipment : Shipment, ITrackable
+    internal class InternationalShipment : Shipment, ITrackable , IInsurable
     {
         private string _destinationCountry;
         public string DestinationCountry
@@ -64,6 +64,11 @@ namespace OOP01Task08
         {
             return $"Shipment {TrackingCode} is Out for Delivery.";
 
+        }
+
+        public decimal CalculateInsurance()
+        {
+            return EstimatedCost * 0.12m ; 
         }
     }
 }

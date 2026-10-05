@@ -6,7 +6,7 @@ using System.Text;
 
 namespace OOP01Task08
 {
-    internal class ExpressShipment : Shipment , ITrackable
+    internal class ExpressShipment : Shipment , ITrackable , IInsurable
     {
         private decimal _extraFee;
         public ExpressShipment(decimal extraFee, string trackingCode, string description, decimal weight, decimal deliveryFee, DeliveryAddress destination) : base(trackingCode, description, weight, deliveryFee, destination)
@@ -51,6 +51,9 @@ namespace OOP01Task08
             return $"Shipment {TrackingCode} has been Delivered.";
         }
 
-
+        public decimal CalculateInsurance()
+        {
+            return EstimatedCost * 0.08m;
+        }
     }
 }
